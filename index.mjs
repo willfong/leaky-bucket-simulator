@@ -6,17 +6,19 @@ app.use(morgan("dev"));
 
 let buckets = {};
 
-const MAX_BUCKET_SIZE = 20;
+const MAX_BUCKET_SIZE = 10;
 const BUCKET_FILL_RATE_PER_SECOND = 1;
 
 const filler = (id) => {
 	buckets[id].timer = setTimeout(() => {
 		buckets[id].requests += BUCKET_FILL_RATE_PER_SECOND;
-		console.log(`Filling bucket: ${id}`);
+		console.log(
+			`[BUCKET ${id}]: Added ${BUCKET_FILL_RATE_PER_SECOND} - Size now: ${buckets[id].requests}/${MAX_BUCKET_SIZE}`
+		);
 		if (buckets[id].requests < MAX_BUCKET_SIZE) {
 			filler(id);
 		} else {
-			console.log("bucket full");
+			console.log(`[BUCKET ${id}]: FULL`);
 			buckets[id].requests = MAX_BUCKET_SIZE;
 			buckets[id].timer = undefined;
 		}
