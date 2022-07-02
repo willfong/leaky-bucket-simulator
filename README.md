@@ -4,8 +4,21 @@ This project was created to simulate the [Shopify API throttle])(https://shopify
 
 ## How to use
 
+Set up:
+
+```
+yarn install
+
+```
+
 Start the server:
 
 ```
 yarn start
+```
+
+Send `50` requests:
+
+```
+yarn request 50
 ```
